@@ -5,7 +5,7 @@ import React from "react";
 import * as Yup from "yup";
 import { supabase } from "@utils/supabaseClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faBuilding, faCheckCircle, faSpinner, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import SocialAuth from "@components/auth/SocialAuth";
@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
     full_name: Yup.string().required("الاسم الكامل مطلوب"),
     phone: Yup.string().required("رقم الهاتف مطلوب"),
     email: Yup.string().email("البريد الإلكتروني غير صحيح").required("البريد الإلكتروني مطلوب"),
-    password: Yup.string().required("كلمة المرور مطلوبة"),
+    password: Yup.string().required("كلمة المرور مطلوبة").min(6, "كلمة المرور يجب أن تكون أكثر من 6 أحرف"),
     role: Yup.string().oneOf(["guest", "host"], "الدور مطلوب"),
 });
 const fields = [
@@ -113,13 +113,33 @@ function SignupPage() {
                         values,
                         handleChange,
                         handleSubmit,
-                        isSubmitting
+                        isSubmitting,
+                        setFieldValue
                     }) => (
                         <form onSubmit={handleSubmit}>
                             {/* Form Header */}
                             <div className="form-header mb-10">
                                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold mb-3">إنشاء حساب جديد</h2>
                                 <p className="text-sm sm:text-base md:text-lg lg:text-lg text-text">أبدأ رحلتك معنا الآن</p>
+                            </div>
+                            {/* Role Selection */}
+                            <div className="role-selection mb-5 flex sm:flex-row flex-col sm:items-center gap-3 *:flex-1">
+                                <label className="guest-role relative cursor-pointer">
+                                    <input onChange={() => setFieldValue("role", "guest")} type="radio" name="role" value="guest" className="peer hidden" checked={values.role === "guest"} />
+                                    <FontAwesomeIcon icon={faCheckCircle} className="text-primary absolute z-10 top-1/2 sm:top-3 left-3 max-sm:-translate-y-1/2 scale-0 transition-transform delay-75 duration-300 peer-checked:scale-100" />
+                                    <div className="content-wrapper rounded-lg bg-grey peer-checked:bg-primary/10 p-3 sm:p-5 border-2 border-transparent peer-checked:border-primary flex sm:flex-col items-center sm:justify-center gap-3 transition-colors">
+                                        <FontAwesomeIcon icon={faUser} className="text-primary text-2xl" />
+                                        <h3 className="font-semibold text-lg">ضيف</h3>
+                                    </div>
+                                </label>
+                                <label className="host-role relative cursor-pointer">
+                                    <input onChange={() => setFieldValue("role", "host")} type="radio" name="role" value="host" className="peer hidden" checked={values.role === "host"} />
+                                    <FontAwesomeIcon icon={faCheckCircle} className="text-primary absolute z-10 top-1/2 sm:top-3 left-3 max-sm:-translate-y-1/2 scale-0 transition-transform delay-75 duration-300 peer-checked:scale-100" />
+                                    <div className="content-wrapper rounded-lg bg-grey peer-checked:bg-primary/10 p-3 sm:p-5 border-2 border-transparent peer-checked:border-primary flex sm:flex-col items-center sm:justify-center gap-3 transition-colors">
+                                        <FontAwesomeIcon icon={faBuilding} className="text-primary text-2xl" />
+                                        <h3 className="font-semibold text-lg">مضيف</h3>
+                                    </div>
+                                </label>
                             </div>
                             {/* Fileds */}
                             <div className="fields mb-5 space-y-3">
