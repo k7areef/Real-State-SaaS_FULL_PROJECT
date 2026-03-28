@@ -24,7 +24,7 @@ function SocialAuth({ isDisabled, className = "" }) {
                 {/* Google Button */}
                 <Button
                     type="button"
-                    variant="ghostOutline"
+                    variant="white"
                     title="المتابعة باستخدام جوجل"
                     aria-label="المتابعة باستخدام جوجل"
                     disabled={isDisabled}
