@@ -3,10 +3,17 @@ import { Toaster } from "react-hot-toast";
 // Pages:
 // # Main Pages:
 import HomePage from "@pages/main/HomePage";
+import PropertiesPage from "@pages/main/PropertiesPage";
+import AboutPage from "@pages/main/AboutPage";
+import ContactPage from "@pages/main/ContactPage";
 // # Auth Pages:
 import LoginPage from "@pages/auth/LoginPage";
 import SignupPage from "@pages/auth/SignupPage";
 // # Dashboard Pages:
+
+// # Error Pages:
+import NotFoundPage from "@pages/errors/NotFoundPage";
+import UnauthorizedPage from "@pages/errors/UnauthorizedPage";
 // Layouts
 import MainLayout from "@layouts/MainLayout";
 import AuthLayout from "@layouts/AuthLayout";
@@ -20,6 +27,9 @@ function App() {
         {/* Main Layout */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="/properties" element={<PropertiesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Route>
         {/* Auth Layout */}
         <Route path="/auth" element={<AuthLayout />}>
@@ -35,6 +45,9 @@ function App() {
         <Route path="/admin" element={<AdminDashboardLayout />}>
           <Route index element={<>Admin Dashboard</>} />
         </Route>
+        {/* Error Pages */}
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/unauthoraized" element={<UnauthorizedPage />} />
       </Routes>
       {/*  Toaster */}
       <Toaster />
