@@ -6,17 +6,10 @@ import * as Yup from "yup";
 import { supabase } from "@utils/supabaseClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBuilding, faCheckCircle, faSpinner, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import SocialAuth from "@components/auth/SocialAuth";
 
-const initialValues = { // ! Don't forget to change role to "host" when ready
-    full_name: "",
-    phone: "",
-    email: "",
-    password: "",
-    role: "guest" // TODO: change to "host" when ready
-};
 const validationSchema = Yup.object().shape({
     full_name: Yup.string().required("الاسم الكامل مطلوب"),
     phone: Yup.string().required("رقم الهاتف مطلوب"),
@@ -60,6 +53,17 @@ const fields = [
 function SignupPage() {
 
     const navigate = useNavigate();
+
+    const { state } = useLocation();
+    const role = state?.role || "guest";
+
+    const initialValues = React.useMemo(() => ({
+        full_name: "",
+        phone: "",
+        email: "",
+        password: "",
+        role: role
+    }), [role]);
 
     const handleSubmit = React.useCallback(async (values, actions) => {
         const { setSubmitting } = actions;
