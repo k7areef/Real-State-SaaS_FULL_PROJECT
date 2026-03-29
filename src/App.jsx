@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 // # Main Pages:
 import HomePage from "@pages/main/HomePage";
 import PropertiesPage from "@pages/main/PropertiesPage";
+import PropertyDetailsPage from "@pages/main/PropertyDetailsPage";
 import AboutPage from "@pages/main/AboutPage";
 import ContactPage from "@pages/main/ContactPage";
 // # Auth Pages:
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/properties" element={<PropertiesPage />} />
+          <Route path="/properties/:id/:slug" element={<PropertyDetailsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Route>

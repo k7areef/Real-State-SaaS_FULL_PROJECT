@@ -7,9 +7,9 @@ import Testimonials from "@components/sections/Testimonials";
 function HomePage() {
     return (
         <div className="home-page">
+            <HeroSection />
             <Features />
             <FeaturedProperties />
-            <HeroSection />
             <Testimonials />
             <CTA />
         </div>
