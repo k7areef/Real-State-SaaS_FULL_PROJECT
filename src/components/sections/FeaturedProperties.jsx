@@ -22,7 +22,8 @@ function FeaturedProperties() {
 
             if (error) throw error;
             return data;
-        }
+        },
+        refetchOnWindowFocus: false
     })
 
     return (
