@@ -1,6 +1,10 @@
 import Button from "@components/UI/Button";
+import { useAuth } from "@contexts/AuthContext";
 
 function CTA() {
+    const { isAuth } = useAuth();
+    if (isAuth) return;
+
     return (
         <section className="cta-section py-5 md:py-10" id="cta">
             <div className="container">

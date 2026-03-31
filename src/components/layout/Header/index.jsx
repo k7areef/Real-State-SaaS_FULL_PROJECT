@@ -4,6 +4,7 @@ import Button from "@components/UI/Button";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "@contexts/AuthContext";
 
 const links = [
     { to: "/", label: "الرئيسية" },
@@ -15,6 +16,7 @@ const links = [
 function Header() {
 
     const [isOpen, setIsOpen] = React.useState(false);
+    const { isAuth } = useAuth();
 
     return (
         <header className="py-4 bg-grey/50 backdrop-blur-md sticky top-0 left-0 right-0 z-50">
@@ -42,13 +44,18 @@ function Header() {
                 </div>
                 {/* Utils */}
                 <div className="utils flex items-center gap-3">
-                    {/* Signup */}
+                    {/* Utility Action */}
                     <Button
-                        to={'/auth/signup'}
-                        state={{ role: "host" }}
-                        className=""
+                        to={isAuth ? '/dashboard' : '/auth/signup'}
+                        {...(isAuth ? {} : { state: { role: "host" } })}
                     >
-                        أضف عقارك
+                        {
+                            isAuth ? (
+                                <>لوحة التحكم</>
+                            ) : (
+                                <>أضف عقارك</>
+                            )
+                        }
                     </Button>
                     {/* Mobile Menu Button */}
                     <button

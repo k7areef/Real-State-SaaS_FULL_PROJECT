@@ -6,6 +6,9 @@ import App from './App.jsx'
 // React Router DOM:
 import { BrowserRouter } from 'react-router-dom'
 
+// Auth Context
+import { AuthContextProvider } from '@contexts/AuthContext'
+
 // TanStack Query
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // Create a client
@@ -15,7 +18,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
       </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>,
