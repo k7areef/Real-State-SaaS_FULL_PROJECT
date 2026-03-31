@@ -17,7 +17,7 @@ function SectionHeader({ title, description, className, titleClassName, descript
         <div className={`section-header mb-5 md:mb-10 flex items-center ${className ? ` ${className}` : ''}`}>
             <div className="text-wrapper flex-1">
                 <h2 className={`title text-2xl md:text-3xl font-bold${titleClassName ? ` ${titleClassName}` : ''}`}>{title}</h2>
-                <p className={`description${descriptionClassName ? ` ${descriptionClassName}` : ''}`}>{description}</p>
+                <p className={`description mt-3${descriptionClassName ? ` ${descriptionClassName}` : ''}`}>{description}</p>
             </div>
             {children && <div className={`children-wrapper${childrenClassName ? ` ${childrenClassName}` : ''}`}>{children}</div>}
         </div>
