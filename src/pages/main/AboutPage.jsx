@@ -1,6 +1,7 @@
 import AboutHeader from "@components/sections/AboutHeader";
 import OurTeam from "@components/sections/OurTeam";
 import Statistics from "@components/sections/Statistics";
+import Testimonials from "@components/sections/Testimonials";
 import WhyChoseUs from "@components/sections/WhyChoseUs";
 
 function AboutPage() {
@@ -10,6 +11,7 @@ function AboutPage() {
             <Statistics />
             <WhyChoseUs />
             <OurTeam />
+            <Testimonials />
         </div>
     )
 }
